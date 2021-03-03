@@ -62,9 +62,9 @@ class Workflows extends AbstractApi
      *
      * @return array|string empty
      */
-    public function dispatches(string $username, string $repository, string $workflow, string $ref, array $inputs = [])
+    public function dispatches(string $username, string $repository, string $workflow, string $ref, array $inputs = null)
     {
-        $parameters = ['ref' => $ref, 'inputs' => $inputs];
+        $parameters = array_filter(['ref' => $ref, 'inputs' => $inputs]);
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/workflows/'.rawurlencode($workflow).'/dispatches', $parameters);
     }
